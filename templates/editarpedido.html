@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pedido</title>
+</head>
+<body>
+    <form action="" method="post">
+        <h1><center>Editar Pedido</center></h1>
+        <p><center>Nome: <input type="text" name="novotitulo" placeholder="{{pedido.titulo}}"></center></p>
+        <p><center>Idade: <input type="text" name="novadescricao" placeholder="{{pedido.descricao}}"></center></p>
+        <center><select name="novostatus" id="pedido">
+            <option value="Pendente">Pendente</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Concluído">Concluído</option>
+        </select></center>
+        <center><button type="submit">Confirmar</button></center>
+        <center><a href="/">Voltar para home page</a></center>
+    </form>
+</body>
+</html>

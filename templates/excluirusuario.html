@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+</head>
+<body>
+    <form method="POST">
+        <p>Tem certeza que deseja excluir o usuario {{usuario.nome}}?</p>
+        <input type="radio" id="sim" name="confirmacao" value="sim">
+        <label for="sim">Sim</label>
+        <input type="radio" id="nao" name="confirmacao" value="nao">
+        <label for="nao">Não</label>
+        <button type="submit">Confirmar</button>
+    </form>
+</body>
+</html>
