@@ -12,6 +12,9 @@ Sistema web para abertura, acompanhamento e gestão de chamados de suporte técn
 ### Detalhes do Chamado
 ![Detalhes do Chamado](screenshots/Screenshot_2.png)
 
+### Home Page Usuário
+![Detalhes do Chamado](screenshots/Screenshot_3.png)
+
 ## Funcionalidades
 
 - **Autenticação e autorização** — login com senha criptografada (Werkzeug) e controle de acesso por papéis (administrador / cliente)
