@@ -23,5 +23,10 @@
     {%else%}
         <p>Nenhum usuário encontrado para o termo pesquisado.</p>
     {%endfor%}
+    {%if usuario.role == 'admin'%}
+        <a href="/paineladmin">Volte para o Painel Admin</a>
+    {%else%}
+        <a href="/">Volte para a Home Page</a>
+    {% endif %}
 </body>
 </html>

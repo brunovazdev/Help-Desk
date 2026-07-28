@@ -26,6 +26,7 @@ def usuarios():
         flash(f'Usuário {novo_usuario.nome} cadastrado com sucesso!')
         return redirect(url_for('usuario.usuarios'))
 
+    usuario = Usuario.query.get(session['usuario_id'])
     buscar = request.args.get('req', '')
     if buscar:
         resultado = Usuario.query.filter(or_(Usuario.nome.ilike(f'%{buscar}%'),
@@ -33,7 +34,7 @@ def usuarios():
             Usuario.id.ilike(f'%{buscar}%')
             )
         ).all()
-        return render_template('buscausuario.html', buscar=buscar, resultado = resultado)
+        return render_template('buscausuario.html', buscar=buscar, resultado = resultado, usuario=usuario)
     lista_setor = Setor.query.all()
 
     pagina = request.args.get('pagina', 1, type=int)
