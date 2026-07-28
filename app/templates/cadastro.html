@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- <div class="container"></div> -->
-    <h1>Cadastrar Usuário</h1>
+    <center><h1>Cadastrar Usuário</h1>
     <form action="" method="post">
         <input type="text" name="nome" placeholder="Nome" required> <br>
         <input type="text" name="email" placeholder="E-mail" required> <br>
@@ -27,7 +26,6 @@
                 <p>{{ cadastrado }}</p>
             {% endfor %}
         {% endif %}
-    {% endwith %}
-    <!--</div>-->
+    {% endwith %}</center>
 </body>
 </html>
