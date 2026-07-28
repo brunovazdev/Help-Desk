@@ -4,6 +4,14 @@ Sistema web para abertura, acompanhamento e gestão de chamados de suporte técn
 
 🔗 **Aplicação no ar:** [falqxy.pythonanywhere.com](https://falqxy.pythonanywhere.com)
 
+## Screenshots
+
+### Painel Administrativo
+![Painel Admin](screenshots/painel-admin.png)
+
+### Detalhes do Chamado
+![Detalhes do Chamado](screenshots/detalhes-chamado.png)
+
 ## Funcionalidades
 
 - **Autenticação e autorização** — login com senha criptografada (Werkzeug) e controle de acesso por papéis (administrador / cliente)
