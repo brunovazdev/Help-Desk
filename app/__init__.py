@@ -3,8 +3,10 @@ from flask_migrate import Migrate
 import os
 from dotenv import load_dotenv
 from .models import *
+from pathlib import Path
 
-load_dotenv() # carrega o .env pra dentro das variáveis de ambiente do sistema
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env') # carrega o .env pra dentro das variáveis de ambiente do sistema
 
 def create_app():
     app = Flask(__name__)
