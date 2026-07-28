@@ -3,8 +3,8 @@
 Sistema web para abertura, acompanhamento e gestão de chamados de suporte técnico, desenvolvido com Flask. Permite que colaboradores de uma empresa abram chamados para o time de TI, acompanhem o andamento e se comuniquem através de comentários, enquanto administradores gerenciam setores, usuários e o fluxo completo dos chamados.
 
 🔗 **Aplicação no ar:** [falqxy.pythonanywhere.com](https://falqxy.pythonanywhere.com) 
-**Usuário:** admin@teste.com
-**Senha:** 123456
+- **Usuário:** admin@teste.com
+- **Senha:** 123456
 
 ## Screenshots
 
