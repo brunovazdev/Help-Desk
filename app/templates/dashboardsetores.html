@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Setores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Setores</h1>
+    {% for setor in setores %}
+    <p>Setor: {{setor.setor}}
+        <a href="{{ url_for('setor.editarsetor', id=setor.id) }}"><button type="button">Editar</button></a>
+        <a href="{{ url_for('setor.confirmar_exclusao_setor', id=setor.id) }}"><button type="button">Excluir</button></a>
+    </p>
+    {% endfor %}
+    <h1>Cadastrar novo setor</h1>
+    <form action="" method="post">
+        <input type="text" name="setor" placeholder="Nome do Setor" required> <br>
+        <button type="submit">Cadastrar Setor</button>
+    </form>
+    <a href="{{ url_for('main.paineladmin') }}">Volte para o Painel Admin</a>
+</body>
+</html>

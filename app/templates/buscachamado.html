@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Busca de Chamados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% for chamado in resultado %}
+        <li>
+            <strong>{{chamado.titulo}}</strong> - Status: {{chamado.status}} - Categoria: {{ chamado.categoria}} Prioridade: {{chamado.prioridade}} <a href="{{ url_for('chamado.detalhes', id=chamado.id)}} "><button type="button">Detalhes</button></a><br>
+            <small>{{chamado.descricao}}</small>
+        </li>
+        {%else%}
+            <p>Nenhum chamado encontrado para o termo pesquisado.</p>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{{ url_for('chamado.chamados') }}">← Voltar para o Painel Admin</a>
+
+</body>
+</html>

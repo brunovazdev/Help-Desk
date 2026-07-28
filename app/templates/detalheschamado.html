@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamado #{{chamado.id}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% set cores_status = {'Pendente': 'aberto', 'Em andamento': 'andamento', 'Concluído': 'concluido'} %}
+    <h1><span class="ticket-tag">#CH-{{ '%04d' % chamado.id }}</span> — {{chamado.titulo}}</h1>
+    <p>Descrição: {{chamado.descricao}}</p>
+    <p>
+        Categoria: {{chamado.categoria}}
+        <span class="pill pill-{{ cores_status.get(chamado.status, 'padrao') }}">{{chamado.status}}</span>
+        {% if chamado.prioridade == 'Urgente' %}<span class="pill pill-urgente">Urgente</span>{% endif %}
+    </p>
+
+    {% with mensagens = get_flashed_messages() %}
+        {% if mensagens %}
+            {% for mensagem in mensagens %}
+                <p>{{ mensagem }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {%if acesso.role == 'admin'%}
+    <form action="" method="post">
+        <a href="{{ url_for('chamado.editarchamado', id=chamado.id) }}"><button type="button">Editar Chamado</button></a>
+    </form>
+    {%endif%}
+
+    <h2>Comentários</h2>
+    {% for comentario in chamado.comentarios %}
+    <p>
+        <strong>{{comentario.autor.nome}}</strong> — {{comentario.data.strftime('%d/%m/%Y %H:%M')}}<br>
+        {{comentario.texto}}
+    </p>
+    {% endfor %}
+
+    <form action="" method="post">
+        <textarea name="comentario" placeholder="Escreva um comentário..." required></textarea> <br>
+        <button type="submit">Comentar</button> <br>
+    </form>
+
+        <a href="{{ url_for('chamado.verchamados') }}">Voltar para meus chamados</a>
+</body>
+</html>

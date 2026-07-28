@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Chamados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Meus Chamados</h1>
+    {% set cores_status = {'Pendente': 'aberto', 'Em andamento': 'andamento', 'Concluído': 'concluido'} %}
+    {% for chamado in chamados.items %}
+        <p>
+            <span class="ticket-tag">#CH-{{ '%04d' % chamado.id }}</span> —
+            {{chamado.titulo}} — {{chamado.categoria}}
+            <span class="pill pill-{{ cores_status.get(chamado.status, 'padrao') }}">{{chamado.status}}</span>
+            {% if chamado.prioridade == 'Urgente' %}<span class="pill pill-urgente">Urgente</span>{% endif %}
+            <a href="{{ url_for('chamado.detalhes', id=chamado.id) }}"><button type="button">Detalhes</button></a>
+        </p>
+    {% endfor %}
+    <div class="paginacao">
+        {% if chamados.has_prev %}
+            <a href="{{ url_for('chamado.verchamados', pagina=chamados.prev_num) }}">« Anterior</a>
+        {% endif %}
+
+        <span>Página {{chamados.page}} de {{chamados.pages}}</span>
+
+        {% if chamados.has_next %}
+            <a href="{{ url_for('chamado.verchamados', pagina=chamados.next_num) }}">Próxima »</a>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('main.home') }}">Voltar para Home Page</a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Usuário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {%for usuario in resultado%}
+        <p>Nome: {{usuario.nome}} - Setor: {{usuario.setor.setor}} - Email: {{usuario.email}} - Role: {{usuario.role}}</p>
+        <p>Chamados desse usuário</p>
+        <ul>
+            {% for chamado in usuario.chamados %}
+                <li>
+                    #{{ chamado.id }} - {{ chamado.titulo }} 
+                    (Status: {{ chamado.status }}) <br>
+                </li>
+            {% else %}
+                <li>Este usuário não possui chamados cadastrados.</li>
+            {% endfor %}
+        </ul>
+    {%else%}
+        <p>Nenhum usuário encontrado para o termo pesquisado.</p>
+    {%endfor%}
+</body>
+</html>

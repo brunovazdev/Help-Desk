@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="home-topbar">
+        <span class="ticket-tag">Olá, {{usuario.nome}}</span>
+        <div class="home-topbar-links">
+            {% if usuario.role == 'admin' %}
+                <a href="{{ url_for('main.paineladmin') }}">Painel Admin</a>
+            {% endif %}
+            <a href="{{ url_for('main.logout') }}">Sair</a>
+        </div>
+    </div>
+
+    <h1>O que você precisa hoje?</h1>
+
+    <div class="action-grid">
+        <a href="{{ url_for('chamado.criarchamado') }}" class="action-card">
+            <span class="action-title">Abrir chamado</span>
+            <span class="action-desc">Relate um problema pro time de TI</span>
+        </a>
+        <a href="{{ url_for('chamado.verchamados') }}" class="action-card">
+            <span class="action-title">Meus chamados</span>
+            <span class="action-desc">Acompanhe o andamento das suas solicitações</span>
+        </a>
+    </div>
+
+    <h2>Seus chamados</h2>
+    <div class="cards-grid">
+        <div class="stat-card stat-aberto">
+            <span class="label">Abertos</span>
+            <span class="valor">{{abertos}}</span>
+        </div>
+        <div class="stat-card stat-andamento">
+            <span class="label">Em Andamento</span>
+            <span class="valor">{{em_andamento}}</span>
+        </div>
+        <div class="stat-card stat-concluido">
+            <span class="label">Concluídos</span>
+            <span class="valor">{{concluidos}}</span>
+        </div>
+    </div>
+</body>
+</html>

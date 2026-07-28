@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <h1>Usuários</h1>
+    <form action="{{url_for('usuario.usuarios')}}" method="GET">
+      <input type="text" name="req" value="{{buscar}}" placeholder="Buscar">
+      <button type="submit">Buscar</button>
+    </form>
+    {% for usuario in usuarios.items %}
+    <p>ID: {{usuario.id}} - Nome: "{{usuario.nome}}" - Email: {{usuario.email}} - Setor: {{usuario.setor.setor}}
+      <a href="{{ url_for('usuario.editarusuario', id=usuario.id) }}"><button type="button">Editar</button></a>
+      <a href="{{ url_for('usuario.excluirusuario', id=usuario.id) }}"><button type="button">Excluir</button></a>
+    </p>
+    {% endfor %}
+    <div class="paginacao">
+      {%if usuarios.has_prev%}
+        <a href="{{url_for('usuario.usuarios', pagina=usuarios.prev_num)}}">« Anterior</a>
+      {%endif%}
+      <span>Página {{usuarios.page}} de {{usuarios.pages}}</span>
+      {%if usuarios.has_next%}
+        <a href="{{url_for('usuario.usuarios', pagina=usuarios.next_num)}}">Próxima »</a>
+      {%endif%}
+    </div>
+    <br>
+    <h1>Cadastrar Usuário</h1>
+    <form action="" method="post">
+        <input type="text" name="nome" placeholder="Nome" required> <br>
+        <input type="text" name="email" placeholder="E-mail" required> <br>
+        <label for="setor">Setor</label>
+        <select name="setor" id="setor">
+            {% for setor in setores %}
+                <option value="{{setor.id}}">{{setor.setor}}</option>
+            {% endfor %}
+        </select> <br>
+        <input type="password" name="senha" placeholder="Senha" required> <br>
+        <button type="submit">Cadastre</button>
+    </form>
+    {% with mensagens = get_flashed_messages() %}
+        {% if mensagens %}
+            {% for cadastrado in mensagens %}
+                <p>{{ cadastrado }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <br>
+    <a href="/paineladmin">Volte para o Painel Admin</a>
+  </body>
+</html>

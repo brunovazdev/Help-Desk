@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="admin">
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <h2>HELPDESK</h2>
+            <nav>
+                <a href="{{ url_for('main.paineladmin') }}" class="active">Dashboard</a>
+                <a href="{{ url_for('chamado.criarchamado') }}">Abertura de Chamados</a>
+                <a href="{{ url_for('chamado.chamados') }}">Chamados</a>
+                <a href="{{ url_for('usuario.usuarios') }}">Usuários</a>
+                <a href="{{ url_for('setor.setores') }}">Setores</a>
+                <a href="{{ url_for('main.logout') }}">Sair</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Dashboard</h1>
+            </div>
+
+            <div class="cards-grid">
+                <div class="stat-card stat-aberto">
+                    <span class="label">Chamados Abertos</span>
+                    <span class="valor">{{abertos}}</span>
+                </div>
+                <div class="stat-card stat-urgente">
+                    <span class="label">Urgentes Ativos</span>
+                    <span class="valor">{{urgentes}}</span>
+                </div>
+                <div class="stat-card stat-andamento">
+                    <span class="label">Em Andamento</span>
+                    <span class="valor">{{em_andamento}}</span>
+                </div>
+                <div class="stat-card stat-concluido">
+                    <span class="label">Concluídos</span>
+                    <span class="valor">{{concluidos}}</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Usuários</span>
+                    <span class="valor">{{total_usuarios}}</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Chamados no Mês</span>
+                    <span class="valor">{{chamados_no_mes}}</span>
+                </div>
+            </div>
+
+            <h2>Últimos Chamados</h2>
+            <table class="chamados-recentes">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Categoria</th>
+                        <th>Prioridade</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set cores_status = {'Pendente': 'aberto', 'Em andamento': 'andamento', 'Concluído': 'concluido'} %}
+                    {% for chamado in recentes %}
+                    <tr>
+                        <td class="ticket-tag">#CH-{{ '%04d' % chamado.id }}</td>
+                        <td>{{chamado.titulo}}</td>
+                        <td>{{chamado.usuario.nome}}</td>
+                        <td>{{chamado.categoria}}</td>
+                        <td>{{chamado.prioridade}}</td>
+                        <td>{{chamado.data.strftime('%d/%m/%Y')}}</td>
+                        <td><span class="pill pill-{{ cores_status.get(chamado.status, 'padrao') }}">{{chamado.status}}</span></td>
+                        <td><a href="{{ url_for('chamado.detalhes', id=chamado.id) }}">Ver</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <br>
+            <a href="{{ url_for('main.cadastro') }}">Cadastrar usuário</a>
+        </main>
+    </div>
+</body>
+</html>

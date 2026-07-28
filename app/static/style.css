@@ -1,0 +1,324 @@
+/* ==========================================================
+   HelpDesk — identidade visual "console de operações de TI"
+   ----------------------------------------------------------
+   Paleta:
+     --navy       #1B2333  estrutura (sidebar, cabeçalhos)
+     --navy-soft  #2A3547  hover / superfícies escuras secundárias
+     --paper      #EEF0F3  fundo geral
+     --card       #FFFFFF  fundo de cards
+     --ink        #1B2333  texto principal
+     --muted      #5B6472  texto secundário
+     --line       #DDE1E7  bordas
+     --blue       #3E6FA8  status: aberto / pendente
+     --amber      #E8A33D  status: em andamento
+     --teal       #2FB6A4  status: concluído
+     --coral      #E1573F  prioridade: urgente / crítico
+
+   Tipografia:
+     IBM Plex Sans  — títulos, corpo, rótulos
+     IBM Plex Mono  — números, ID de chamado, timestamps
+     (a fonte mono é a "assinatura" do projeto: remete a
+      log de sistema / console de operações, coerente com
+      o assunto — um helpdesk de TI)
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --navy: #1B2333;
+    --navy-soft: #2A3547;
+    --paper: #EEF0F3;
+    --card: #FFFFFF;
+    --ink: #1B2333;
+    --muted: #5B6472;
+    --line: #DDE1E7;
+
+    --blue: #3E6FA8;
+    --amber: #E8A33D;
+    --teal: #2FB6A4;
+    --coral: #E1573F;
+
+    --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--paper);
+    color: var(--ink);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 32px 0 16px;
+    letter-spacing: -0.01em;
+}
+h1:first-of-type { margin-top: 0; }
+
+h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 32px 0 12px;
+}
+
+/* Listagens genéricas (setor/usuário) continuam como cards simples */
+p {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+form {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 420px;
+}
+p form, p a { all: unset; display: inline; }
+p a { color: var(--blue); font-weight: 600; cursor: pointer; }
+
+input[type="text"], input[type="email"], input[type="password"],
+select, textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--paper);
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(62, 111, 168, 0.15);
+}
+
+button, input[type="submit"] {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+button:hover, input[type="submit"]:hover { background: var(--navy-soft); }
+
+form[action*="excluir"] button,
+form[action*="exclusao"] button { background: var(--coral); }
+form[action*="excluir"] button:hover,
+form[action*="exclusao"] button:hover { background: #C0432D; }
+
+a { color: var(--blue); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+a:hover { text-decoration: underline; }
+label { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+
+/* ===== Tag de chamado — o elemento de assinatura do projeto ===== */
+.ticket-tag {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+}
+
+/* ===== Pill de status/prioridade ===== */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+}
+.pill::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.pill-aberto      { background: rgba(62,111,168,0.12); color: var(--blue); }
+.pill-andamento   { background: rgba(232,163,61,0.15); color: var(--amber); }
+.pill-concluido   { background: rgba(47,182,164,0.15); color: var(--teal); }
+.pill-urgente     { background: rgba(225,87,63,0.14);  color: var(--coral); }
+.pill-padrao      { background: rgba(91,100,114,0.12); color: var(--muted); }
+
+/* ===== Painel Admin — layout com sidebar ===== */
+body.admin { max-width: none; padding: 0; margin: 0; }
+
+.admin-layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+    width: 230px;
+    flex-shrink: 0;
+    background: var(--navy);
+    color: #fff;
+    padding: 28px 14px;
+}
+.sidebar h2 {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: #fff;
+    letter-spacing: 0.03em;
+    margin: 0 0 28px;
+    padding: 0 10px;
+}
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #AEB8CC;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--navy-soft); color: #fff; text-decoration: none; }
+.sidebar nav a.active {
+    background: var(--navy-soft);
+    color: #fff;
+    border-left: 3px solid var(--teal);
+}
+
+.main-content { flex: 1; padding: 32px 40px; background: var(--paper); max-width: 1100px; }
+.topbar { margin-bottom: 24px; }
+.topbar h1 { margin: 0; }
+
+/* Stat cards — fundo claro + barra de status à esquerda (o "sinal") */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+}
+.stat-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--muted);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.stat-card .valor {
+    font-family: var(--font-mono);
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+}
+.stat-card .label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.stat-aberto    { border-left-color: var(--blue); }
+.stat-urgente   { border-left-color: var(--coral); }
+.stat-andamento { border-left-color: var(--amber); }
+.stat-concluido { border-left-color: var(--teal); }
+
+table.chamados-recentes {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.88rem;
+}
+table.chamados-recentes th, table.chamados-recentes td {
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+table.chamados-recentes th {
+    background: var(--paper);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+table.chamados-recentes tbody tr:last-child td { border-bottom: none; }
+
+/* ===== Home do usuário ===== */
+
+.home-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.home-topbar-links {
+    display: flex;
+    gap: 16px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.action-card {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 10px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+.action-card:hover {
+    background: var(--navy-soft);
+    text-decoration: none;
+}
+.action-card .action-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+}
+.action-card .action-desc {
+    font-size: 0.82rem;
+    color: #AEB8CC;
+    font-weight: 400;
+}

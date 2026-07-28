@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Chamado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Criar Chamado</h1>
+    <form action="" method="post">
+        <input type="text" name="titulo" placeholder="Título">
+        <input type="text" name="descricao" placeholder="Descrição">
+        <select name="categoria" id="categoria">
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+            <option value="Rede">Rede</option>
+            <option value="Acesso">Acesso</option>
+            <option value="Outros">Outros</option>
+        </select name="categoria" id="setor">
+        <input type="submit" value="Criar Chamado">
+    </form>
+    {%if usuario.role == 'admin'%}
+        <a href="/paineladmin">Volte para o Painel Admin</a>
+    {%else%}
+        <a href="/">Volte para a Home Page</a>
+    {% endif %}
+</body>
+</html>

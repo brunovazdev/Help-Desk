@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Chamados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Chamados</h1>
+    <form action="{{ url_for('chamado.chamados') }}" method="GET">
+        <input type="text" name="req" value="{{buscar}}" placeholder="Pesquisar...">
+        <button type="submit">Buscar</button>
+    </form>
+    {%for chamado in chamados.items%}
+        <p>ID: {{chamado.id}} - Título: {{chamado.titulo}} - Descrição: {{chamado.descricao}} - ID do autor {{chamado.usuario_id}} - Categoria: {{chamado.categoria}} - Status: {{chamado.status}}
+        <a href="{{ url_for('chamado.editarchamado', id=chamado.id) }}"><button type="button">Editar</button></a>
+        <a href="{{ url_for('chamado.excluirchamado', id=chamado.id) }}"><button type="button">Excluir</button></a>
+        <a href="{{ url_for('chamado.detalhes', id=chamado.id)}} "><button type="button">Detalhes</button></a>
+        </p>
+    {%endfor%}
+    <div class="paginacao">
+        {% if chamados.has_prev %}
+            <a href="{{ url_for('chamado.chamados', pagina=chamados.prev_num) }}">« Anterior</a>
+        {% endif %}
+
+        <span>Página {{chamados.page}} de {{chamados.pages}}</span>
+
+        {% if chamados.has_next %}
+            <a href="{{ url_for('chamado.chamados', pagina=chamados.next_num) }}">Próxima »</a>
+        {% endif %}
+    </div>
+    <h1>Novo chamado</h1>
+    <form action="" method="post">
+        <input type="text" name="titulo" placeholder="Título" required> <br>
+        <input type="text" name="descricao" placeholder="Descrição" required> <br>
+        <button type="submit">Criar Chamado</button>
+    </form>
+    <a href="/paineladmin">Volte para o Painel Admin</a>
+</body>
+</html>

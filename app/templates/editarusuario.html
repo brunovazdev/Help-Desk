@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form action="" method="post">
+        <h1>Editar Usuário</h1>
+        <p>Nome: <input type="text" name="novonome" placeholder="{{usuario.nome}}"></p>
+        <p>Email: <input type="text" name="novoemail" placeholder="{{usuario.email}}"></p>
+        <button type="submit">Confirmar</button>
+        <a href="/paineladmin">Volte para o Painel Admin</a>
+    </form>
+</body>
+</html>
