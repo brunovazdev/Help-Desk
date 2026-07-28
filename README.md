@@ -7,10 +7,10 @@ Sistema web para abertura, acompanhamento e gestão de chamados de suporte técn
 ## Screenshots
 
 ### Painel Administrativo
-![Painel Admin](screenshots/painel-admin.png)
+![Painel Admin](screenshots/Screenshot_1)
 
 ### Detalhes do Chamado
-![Detalhes do Chamado](screenshots/detalhes-chamado.png)
+![Detalhes do Chamado](screenshots/Screenshot_2)
 
 ## Funcionalidades
 
