@@ -18,7 +18,7 @@ def criarchamado():
         db.session.commit()
         flash(f'Chamado {novo_chamado.id} criado com sucesso!')
         return redirect(url_for('chamado.verchamados'))
-    usuario = Usuario.query.get['usuario_id']
+    usuario = Usuario.query.get(session['usuario_id'])
     return render_template('criarchamado.html', usuario=usuario)
 
 @chamado_bp.route('/chamado/visualizar')
